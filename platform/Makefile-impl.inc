@@ -1,20 +1,14 @@
-LIB   = $(top_builddir)/lib
-
-pkgconfigdir = $(libdir)/pkgconfig
-pkgconfig_DATA = $(top_builddir)/pkgconfig/libodp-linux.pc
-
-.PHONY: pkgconfig/libodp-linux.pc
+# Common Makefile portion for all ODP implementations
+include $(top_srcdir)/platform/Makefile-paths.inc
 
 VPATH = $(srcdir) $(builddir)
-
 AM_LDFLAGS += -version-number '$(ODP_LIBSO_VERSION)'
 
 AM_CFLAGS += "-DGIT_HASH=$(VERSION)"
 AM_CFLAGS += $(VISIBILITY_CFLAGS)
 
-#The implementation will need to retain the deprecated implementation
+# The implementation will need to retain the deprecated implementation
 AM_CFLAGS += -Wno-deprecated-declarations
-
 AM_CFLAGS += @PTHREAD_CFLAGS@
 
 odpapispecincludedir= $(includedir)/odp/api/spec
@@ -100,22 +94,3 @@ odpapiabiarchinclude_HEADERS = \
 	$(top_srcdir)/include/odp/arch/@ARCH_ABI@/odp/api/abi/pool.h \
 	$(top_srcdir)/include/odp/arch/@ARCH_ABI@/odp/api/abi/queue.h \
 	$(top_srcdir)/include/odp/arch/@ARCH_ABI@/odp/api/abi/shared_memory.h
-
-EXTRA_DIST = \
-	     arch/arm/odp/api/cpu_arch.h \
-	     arch/arm/odp_cpu_arch.c \
-	     arch/arm/odp_sysinfo_parse.c \
-	     arch/default/odp/api/cpu_arch.h \
-	     arch/default/odp_cpu_arch.c \
-	     arch/default/odp_sysinfo_parse.c \
-	     arch/mips64/odp/api/cpu_arch.h \
-	     arch/mips64/odp_cpu_arch.c \
-	     arch/mips64/odp_sysinfo_parse.c \
-	     arch/powerpc/odp/api/cpu_arch.h \
-	     arch/powerpc/odp_cpu_arch.c \
-	     arch/powerpc/odp_sysinfo_parse.c \
-	     arch/x86/odp/api/cpu_arch.h \
-	     arch/x86/odp_cpu_arch.c \
-	     arch/x86/odp_sysinfo_parse.c \
-	     arch/x86/cpu_flags.c \
-	     arch/x86/cpu_flags.h

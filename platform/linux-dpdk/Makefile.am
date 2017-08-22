@@ -1,5 +1,4 @@
-include $(top_srcdir)/platform/Makefile.inc
-include $(top_srcdir)/platform/@with_platform@/Makefile.inc
+include $(top_srcdir)/platform/Makefile-impl.inc
 
 lib_LTLIBRARIES = $(LIB)/libodp-dpdk.la
 

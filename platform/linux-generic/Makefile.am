@@ -1,20 +1,14 @@
 # Uncomment this if you need to change the CUSTOM_STR string
-#export CUSTOM_STR=https://git.linaro.org/lng/odp.git
+# export CUSTOM_STR=https://git.linaro.org/lng/odp.git
+include $(top_srcdir)/platform/Makefile-impl.inc
 
-include $(top_srcdir)/platform/Makefile.inc
-include $(top_srcdir)/platform/@with_platform@/Makefile.inc
+pkgconfig_DATA = $(top_builddir)/pkgconfig/libodp-linux.pc
+.PHONY: pkgconfig/libodp-linux.pc
 
 lib_LTLIBRARIES = $(LIB)/libodp-linux.la
 
-AM_CFLAGS +=  -I$(srcdir)/include
-AM_CFLAGS +=  -I$(top_srcdir)/include
-AM_CFLAGS +=  -I$(top_srcdir)/frameworks/modular
-AM_CFLAGS +=  -I$(top_srcdir)/include/odp/arch/@ARCH_ABI@
-AM_CFLAGS +=  -I$(top_builddir)/include
-AM_CFLAGS +=  -I$(top_srcdir)/arch/@ARCH_DIR@
-AM_CFLAGS +=  -Iinclude
-AM_CFLAGS +=  -DSYSCONFDIR=\"@sysconfdir@\"
-AM_CFLAGS +=  -D_ODP_PKTIO_IPC
+AM_CFLAGS   += -DSYSCONFDIR=\"@sysconfdir@\"
+AM_CFLAGS   += -D_ODP_PKTIO_IPC
 
 AM_CPPFLAGS +=  $(OPENSSL_CPPFLAGS)
 AM_CPPFLAGS +=  $(DPDK_CPPFLAGS)
@@ -217,7 +211,26 @@ noinst_HEADERS = \
 		  ${srcdir}/include/protocols/tcp.h \
 		  ${srcdir}/include/protocols/thash.h \
 		  ${srcdir}/include/protocols/udp.h \
-		  ${srcdir}/Makefile.inc
+		  ${srcdir}/Makefile-paths.inc
+
+EXTRA_DIST = \
+		  arch/arm/odp/api/cpu_arch.h \
+		  arch/arm/odp_cpu_arch.c \
+		  arch/arm/odp_sysinfo_parse.c \
+		  arch/default/odp/api/cpu_arch.h \
+		  arch/default/odp_cpu_arch.c \
+		  arch/default/odp_sysinfo_parse.c \
+		  arch/mips64/odp/api/cpu_arch.h \
+		  arch/mips64/odp_cpu_arch.c \
+		  arch/mips64/odp_sysinfo_parse.c \
+		  arch/powerpc/odp/api/cpu_arch.h \
+		  arch/powerpc/odp_cpu_arch.c \
+		  arch/powerpc/odp_sysinfo_parse.c \
+		  arch/x86/odp/api/cpu_arch.h \
+		  arch/x86/odp_cpu_arch.c \
+		  arch/x86/odp_sysinfo_parse.c \
+		  arch/x86/cpu_flags.c \
+		  arch/x86/cpu_flags.h
 
 if ARCH_IS_ARM
 noinst_HEADERS += ${srcdir}/arch/arm/odp_atomic.h \
