@@ -3,5 +3,10 @@ set -x
 aclocal -I config -I m4
 libtoolize --copy
 autoheader
+topdir=`pwd`
+cd platform/linux-generic
+make -f modules-autogen.mk autogen-Makefile.include > Makefile-modules.inc
+make -f modules-autogen.mk autogen-libodp-modules.pc.in > ${topdir}/pkgconfig/libodp-modules.pc.in
+cd ${topdir}
 automake --add-missing --copy --warnings=all
 autoconf --force

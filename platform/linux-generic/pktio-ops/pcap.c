@@ -34,6 +34,8 @@
  * The total length of the string is limited by PKTIO_NAME_LEN.
  */
 
+#ifdef HAVE_PCAP
+
 #include <odp_posix_extensions.h>
 
 #include <odp_api.h>
@@ -466,7 +468,4 @@ ODP_MODULE_CONSTRUCTOR(pcap_pktio_ops)
 	odp_subsystem_register_module(pktio_ops, &pcap_pktio_ops);
 }
 
-/* Temporary variable to enable link this module,
- * will remove in Makefile scheme changes.
- */
-int enable_link_pcap_pktio_ops = 0;
+#endif /* HAVE_PCAP */

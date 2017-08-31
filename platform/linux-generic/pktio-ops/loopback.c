@@ -287,8 +287,3 @@ ODP_MODULE_CONSTRUCTOR(loopback_pktio_ops)
 
 	odp_subsystem_register_module(pktio_ops, &loopback_pktio_ops);
 }
-
-/* Temporary variable to enable link this module,
- * will remove in Makefile scheme changes.
- */
-int enable_link_loopback_pktio_ops = 0;

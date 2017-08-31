@@ -812,8 +812,3 @@ ODP_MODULE_CONSTRUCTOR(ipc_pktio_ops)
 
 	odp_subsystem_register_module(pktio_ops, &ipc_pktio_ops);
 }
-
-/* Temporary variable to enable link this module,
- * will remove in Makefile scheme changes.
- */
-int enable_link_ipc_pktio_ops = 0;

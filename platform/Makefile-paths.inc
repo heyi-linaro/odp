@@ -3,6 +3,9 @@
 LIB = $(top_builddir)/lib
 pkgconfigdir = $(libdir)/pkgconfig
 
+# Where all modules will be built
+MODULES = $(LIB)/modules
+
 GLOBAL_INCLUDES = -I$(top_srcdir)/include
 GLOBAL_INCLUDES += -I$(top_srcdir)/frameworks/modular
 GLOBAL_INCLUDES += -I$(top_srcdir)/include/odp/arch/$(ARCH_ABI)

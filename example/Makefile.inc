@@ -6,4 +6,4 @@ AM_CFLAGS += -I$(srcdir) \
 	     -I$(top_srcdir)/example \
 	     -I$(top_srcdir)/helper/include
 
-AM_LDFLAGS += -L$(LIB)
+AM_LDFLAGS += -L$(LIB) $(STATIC_MODULES_LDFLAGS)

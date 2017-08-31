@@ -11,7 +11,7 @@ INCFLAGS = -I$(top_srcdir)/helper/include \
 ODP_PLATFORM = ${with_platform}
 
 AM_CFLAGS += $(INCFLAGS)
-AM_LDFLAGS += -static
+AM_LDFLAGS += -static $(STATIC_MODULES_LDFLAGS)
 
 EXECUTABLES = chksum$(EXEEXT) \
               cuckootable$(EXEEXT) \

@@ -179,7 +179,6 @@ noinst_HEADERS = \
 		  ${srcdir}/include/odp_packet_internal.h \
 		  ${srcdir}/include/odp_packet_io_internal.h \
 		  ${srcdir}/include/odp_packet_io_ring_internal.h \
-		  ${srcdir}/pktio/dpdk.h \
 		  ${srcdir}/include/odp_pktio_ops_ipc.h \
 		  ${srcdir}/include/odp_pktio_ops_loopback.h \
 		  ${srcdir}/include/odp_pktio_ops_netmap.h \
@@ -211,7 +210,8 @@ noinst_HEADERS = \
 		  ${srcdir}/include/protocols/tcp.h \
 		  ${srcdir}/include/protocols/thash.h \
 		  ${srcdir}/include/protocols/udp.h \
-		  ${srcdir}/Makefile-paths.inc
+		  ${srcdir}/Makefile-paths.inc \
+		  $(srcdir)/Makefile-modules.inc
 
 EXTRA_DIST = \
 		  arch/arm/odp/api/cpu_arch.h \
@@ -274,20 +274,6 @@ __LIB__libodp_linux_la_SOURCES = \
 			   odp_packet.c \
 			   odp_packet_flags.c \
 			   odp_packet_io.c \
-			   pktio/ethtool.c \
-			   pktio/subsystem.c \
-			   pktio/ipc.c \
-			   pktio/common.c \
-			   pktio/loopback.c \
-			   pktio/netmap.c \
-			   pktio/dpdk.c \
-			   pktio/socket.c \
-			   pktio/socket_mmap.c \
-			   pktio/sysfs.c \
-			   pktio/tap.c \
-			   pktio/ring.c \
-			   pool/generic.c \
-			   pool/subsystem.c \
 			   odp_pkt_queue.c \
 			   odp_queue.c \
 			   odp_queue_if.c \
@@ -340,18 +326,15 @@ __LIB__libodp_linux_la_SOURCES += arch/x86/cpu_flags.c \
 				  arch/x86/odp_sysinfo_parse.c
 endif
 
-if HAVE_PCAP
-__LIB__libodp_linux_la_SOURCES += pktio/pcap.c
-endif
-
-pool/generic.lo: AM_CFLAGS += -DIM_ACTIVE_MODULE
-
 # Build modular framework into odp-linux library
 modularframeworkdir = $(top_srcdir)/frameworks/modular
 noinst_HEADERS += $(modularframeworkdir)/list.h \
 		  $(modularframeworkdir)/odp_module.h
 
 __LIB__libodp_linux_la_SOURCES += ../../frameworks/modular/odp_module.c
+
+# Subsystem and module's auto-generated rules and targets
+include $(srcdir)/Makefile-modules.inc
 
 __LIB__libodp_linux_la_LIBADD = $(ATOMIC_LIBS)
 __LIB__libodp_linux_la_LIBADD += $(OPENSSL_LIBS)

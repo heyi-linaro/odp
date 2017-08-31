@@ -22,7 +22,7 @@
 #include <odp_classification_internal.h>
 #include <odp_debug_internal.h>
 
-#include <pktio/dpdk.h>
+#include <pktio-ops/dpdk.h>
 #include <protocols/eth.h>
 
 #include <rte_config.h>
@@ -1362,10 +1362,5 @@ ODP_MODULE_CONSTRUCTOR(dpdk_pktio_ops)
 
 	odp_subsystem_register_module(pktio_ops, &dpdk_pktio_ops);
 }
-
-/* Temporary variable to enable link this module,
- * will remove in Makefile scheme changes.
- */
-int enable_link_dpdk_pktio_ops = 0;
 
 #endif /* ODP_PKTIO_DPDK */
